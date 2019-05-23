@@ -22,37 +22,26 @@
         }
     </style>
     <script>
-        function allowDrop(e) {
-            e.preventDefault();
-        }
-
-        function handleDragStart(e) {
-            e.dataTransfer.effectAllowed = 'move';
-            e.dataTransfer.setData("Text", e.target.id);
-        }
-
-        function handleDrop(e) {
-            e.preventDefault();
-            var src = e.dataTransfer.getData("Text");
-            e.target.appendChild(document.getElementById(src));
-        }
+        
 /**/</script>
 </head>
 <body>
-    <canvas id='canvas' class='canvas' width='600' height='600' style='border:1px solid #000;' ondrop="handleDrop(event)" ondragover="allowDrop(event)">Looks like HTML% canvas is turned off. Sorry, this tower defense game needs canvas to work</canvas> 
-        <div class='tower' style='background-color: green;' onclick='changeTower(0);' draggable="true" ondragstart="handleDragStart(event)" >
-            Tower 1
-            <br>
-            Range: med
-            <br>
-            Damage: med
-            <br>
-            Rate: med
-            <br>
-            Cost: 50
-        </div>
-        <p>
-        <div class='tower' style='background-color: brown;' onclick='changeTower(1);' draggable="true" ondragstart="handleDragStart(event)">
+    <canvas id='canvas' class='canvas' width='600' height='600' style='border:1px solid #000;' ondrop="handleDrop(event)" ondragover="allowDrop(event)">Looks like HTML% canvas is turned off. Sorry, this tower defense game needs canvas to work</canvas>
+    <img id="img1" src="image/tower1.png" draggable="true" ondragstart="handleDragStart1(event)" width="50" height="50">
+    <div class='tower' style='background-color: green;' onclick='changeTower(0);'>
+        Tower 1
+        <br>
+        Range: med
+        <br>
+        Damage: med
+        <br>
+        Rate: med
+        <br>
+        Cost: 50
+    </div>
+    <p>
+        <img id="img2" src="image/tower2.png" draggable="true" ondragstart="handleDragStart2(event)" width="50" height="50">
+        <div class='tower' style='background-color: brown;' onclick='changeTower(1);' ">
             Tower 2
             <br>
             Range: long
@@ -61,9 +50,10 @@
             <br>
             Rate: high
             <br>
-            Cost: 75 
+            Cost: 75
         </div>
-        <p>
+    <p>
+        <img id="img3" src="image/tower3.png" draggable="true" ondragstart="handleDragStart3(event)" width="50" height="50">
         <div class='tower' style='background-color:aqua;' onclick='changeTower(2);' draggable="true" ondragstart="handleDragStart(event)">
             Tower 3
             <br>
@@ -73,7 +63,7 @@
             <br>
             Rate: med
             <br>
-            Cost: 75 
+            Cost: 75
         </div>
         <br>
         <div style='width:600px;'>
@@ -81,11 +71,12 @@
             <span class='right'>Money: <span id='money'>250</span></span>
             <br>Attackers Stopped: <span id='stopped'>0</span>
         </div>
-        <p>3 different towers, 3 different attacker types. Attackers get stronger as game progresses. 
+<p>
+        3 different towers, 3 different attacker types. Attackers get stronger as game progresses.
         <script type='text/javascript' src='mainLoop.js'></script>
         <script type='text/javascript' src='attackerUnits.js'></script>
         <script type='text/javascript' src='towerUnits.js'></script>
         <script type='text/javascript' src='bullets.js'></script>
         <script type='text/javascript' src='mouseClick.js'></script>
-    </body>
+</body>
 </html>

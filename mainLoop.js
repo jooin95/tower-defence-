@@ -21,7 +21,6 @@ addEnemyTimer = 60,
 money = 250,
 moneyIncrement = 5;
 
-
 //draw stuff
 mainLoopRender = function() {
   context.beginPath();
@@ -35,7 +34,9 @@ mainLoopRender = function() {
   for(var i = 0, j = bullets.length; i < j; i++) {
     bullets[i].draw();
   }
-  drawMouse(); //potential gun radius
+  if(mouseDown){
+    drawMouse(); //potential gun radius
+  }
   requestAnimationFrame(mainLoopRender);
 };
 
