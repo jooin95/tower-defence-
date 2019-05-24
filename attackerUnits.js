@@ -1,6 +1,13 @@
 var enemies = [];
 var addedLife = 0; //incremented in checkForDead()
 
+var animation =0; 
+var enemy1 = new Array();
+for(var i = 1; i <= 4; i++){
+	enemy1[i-1] = new Image();
+	enemy1[i-1].src = "image/enemy" + i + ".png";
+}
+
 function Enemy(x,y) {
   this.x = x,
   this.y = y,
@@ -13,12 +20,20 @@ Enemy.prototype.speed = baseSpeed;
 Enemy.prototype.color = 'red';
 
 Enemy.prototype.draw = function() {
-  context.beginPath();
-  context.fillStyle = this.color;
-  context.fillRect(this.x,this.y,rectWidth,rectWidth);
+  if(animation<4){
+	  context.drawImage(enemy1[animation],this.x,this.y,rectWidth,rectWidth);  
+	  animation++;
+  }
+  else{
+	  animation = 0;
+	  context.drawImage(enemy1[animation],this.x,this.y,rectWidth,rectWidth);
+  }
+  //context.fillStyle = this.color;
+  //context.fillRect(this.x,this.y,rectWidth,rectWidth);
   //life bar
-  context.fillStyle='orange';
-  context.fillRect(this.x,this.y+rectWidth/3,rectWidth*this.life/(this.maxLife+addedLife),rectWidth/3);
+  context.beginPath();
+  context.fillStyle='red';
+  context.fillRect(this.x,this.y-10,rectWidth*this.life/(this.maxLife+addedLife),rectWidth/3);
 };
 
 Enemy.prototype.move = function() {

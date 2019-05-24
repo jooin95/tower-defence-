@@ -42,71 +42,73 @@
             border: 1px solid;
 
         }
-#btn{
-border: 0px;
-margin: 0px;
-background-color:white;
-}
-#battle{
-position:absolute;
-left: 10px;
-top:10px;
-}
-#box1{
+        #btn {
+            border: 0px;
+            margin: 0px;
+            background-color: white;
+        }
+        #battle {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+        }
+        #box1 {
             display: inline-block;
-z-index:0;
-}
-#box2{
-position: absolute;
-top: 480px;
-left: 650px;
-width: 120px; height: 120px;
-background:teal;
-z-index:0;
-}
-#img1{
-position:absolute;
-left: 620px;
-top:40px;
-z-index:1;
-}
-#img2{
-position:absolute;
-left: 620px;
-top:160px;
-z-index:1;
-}
-#img3{
-position:absolute;
-left: 620px;
-top:280px;
-z-index:1;
-}
+            z-index: 0;
+        }
+        #box2 {
+            position: absolute;
+            top: 480px;
+            left: 650px;
+            width: 120px;
+            height: 120px;
+            background: teal;
+            z-index: 0;
+        }
+        #img1 {
+            position: absolute;
+            left: 620px;
+            top: 40px;
+            z-index: 1;
+        }
+        #img2 {
+            position: absolute;
+            left: 620px;
+            top: 160px;
+            z-index: 1;
+        }
+        #img3 {
+            position: absolute;
+            left: 620px;
+            top: 280px;
+            z-index: 1;
+        }
 
-#towerclick{
-if
-}
+        #towerclick {
+            if
+        }
     </style>
 
     <script>
-function speed_up(){
-gamespeed=gamespeed/2;
-}
-function speed_down(){
-gamespeed=gamespeed*2;
-}
-function alldead(){
-  for (var i = 0, j = enemies.length; i < j; i++ ) {
-    enemies[i].life =0 ;}
-  for (var i = 0, j = enemies.length; i < j; i++ ) {
-      enemies.splice(i,1);
-      i--;
-      j--; 
-}
-}
-function upgrade(){
-	towers[i].prototype.hurt=towers[i].prototype.hurt*2;
-}
+        function speed_up() {
+            gamespeed = gamespeed / 2;
+        }
+        function speed_down() {
+            gamespeed = gamespeed * 2;
+        }
+        function alldead() {
+            for (var i = 0, j = enemies.length; i < j; i++) {
+                enemies[i].life = 0;
+            }
+            for (var i = 0, j = enemies.length; i < j; i++) {
+                enemies.splice(i, 1);
+                i--;
+                j--;
+            }
+        }
+        function upgrade() {
+            towers[i].prototype.hurt = towers[i].prototype.hurt * 2;
+        }}
 
 /**/</script>
 
