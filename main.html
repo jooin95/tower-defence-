@@ -1,91 +1,232 @@
 
+
+
 <!DOCTYPE html>
+
 <html>
+
 <head>
+
     <title>HTML5/Canvas/Javascript tower defense game</title>
+
     <meta name="description" content="A tower defense game made with JavaScript and Canvas.">
+
     <style>
+
         .right {
+
             float: right;
+
         }
+
+
 
         .canvas {
+
             float: left;
+
             margin-right: 10px;
+
             background: url(image/mainLoop.png);
+
         }
+
+
 
         .tower {
+
             display: inline-block;
+
             padding: 5px;
+
             border: 1px solid;
+
         }
+#btn{
+border: 0px;
+margin: 0px;
+background-color:white;
+}
+#battle{
+position:absolute;
+left: 10px;
+top:10px;
+}
+#box1{
+            display: inline-block;
+z-index:0;
+}
+#box2{
+position: absolute;
+top: 480px;
+left: 650px;
+width: 120px; height: 120px;
+background:teal;
+z-index:0;
+}
+#img1{
+position:absolute;
+left: 620px;
+top:40px;
+z-index:1;
+}
+#img2{
+position:absolute;
+left: 620px;
+top:160px;
+z-index:1;
+}
+#img3{
+position:absolute;
+left: 620px;
+top:280px;
+z-index:1;
+}
+
+#towerclick{
+if
+}
     </style>
+
     <script>
-        function allowDrop(e) {
-            e.preventDefault();
-        }
+function speed_up(){
+gamespeed=gamespeed/2;
+}
+function speed_down(){
+gamespeed=gamespeed*2;
+}
+function alldead(){
+  for (var i = 0, j = enemies.length; i < j; i++ ) {
+    enemies[i].life =0 ;}
+  for (var i = 0, j = enemies.length; i < j; i++ ) {
+      enemies.splice(i,1);
+      i--;
+      j--; 
+}
+}
+function upgrade(){
+	towers[i].prototype.hurt=towers[i].prototype.hurt*2;
+}
 
-        function handleDragStart(e) {
-            e.dataTransfer.effectAllowed = 'move';
-            e.dataTransfer.setData("Text", e.target.id);
-        }
-
-        function handleDrop(e) {
-            e.preventDefault();
-            var src = e.dataTransfer.getData("Text");
-            e.target.appendChild(document.getElementById(src));
-        }
 /**/</script>
+
 </head>
+
 <body>
-    <canvas id='canvas' class='canvas' width='600' height='600' style='border:1px solid #000;' ondrop="handleDrop(event)" ondragover="allowDrop(event)">Looks like HTML% canvas is turned off. Sorry, this tower defense game needs canvas to work</canvas> 
-        <div class='tower' style='background-color: green;' onclick='changeTower(0);' draggable="true" ondragstart="handleDragStart(event)" >
-            Tower 1
-            <br>
-            Range: med
-            <br>
-            Damage: med
-            <br>
-            Rate: med
-            <br>
-            Cost: 50
-        </div>
-        <p>
-        <div class='tower' style='background-color: brown;' onclick='changeTower(1);' draggable="true" ondragstart="handleDragStart(event)">
-            Tower 2
-            <br>
-            Range: long
-            <br>
-            Damage: med
-            <br>
-            Rate: high
-            <br>
-            Cost: 75 
-        </div>
-        <p>
-        <div class='tower' style='background-color:aqua;' onclick='changeTower(2);' draggable="true" ondragstart="handleDragStart(event)">
-            Tower 3
-            <br>
-            Range: short
-            <br>
-            Damage: high
-            <br>
-            Rate: med
-            <br>
-            Cost: 75 
-        </div>
+<div id = "box2">
+<p> towers Store
+<br>
+<button type="button" onclick="upgrade();">Upgrade</button>
+<button type="button" onclick="powerup();">sell</button>
+</div>
+    <canvas id='canvas' class='canvas' width='600' height='600' style='border:1px solid #000;' ondrop="handleDrop(event)" ondragover="allowDrop(event)">Looks like HTML% canvas is turned off. Sorry, this tower defense game needs canvas to work</canvas>
+ <div id="box1"><img src="image/box.png" width="50" height="80"/></div>
+    <img id="img1" src="image/tower1.png" draggable="true" ondragstart="handleDragStart1(event)" width="50" height="50">
+
+    <div class='tower' style='background-color: green;' onclick='changeTower(0);'>
+
+        Tower 1
+
         <br>
-        <div style='width:600px;'>
-            Attackers Score: <span id='attackersScore'>0</span>
-            <span class='right'>Money: <span id='money'>250</span></span>
-            <br>Attackers Stopped: <span id='stopped'>0</span>
+
+        Range: med
+
+        <br>
+
+        Damage: med
+
+        <br>
+
+        Rate: med
+
+        <br>
+
+        Cost: 50
+
+    </div>
+
+    <p>
+<div id="box1"><img src="image/box.png" width="50" height="80"/></div>
+        <img id="img2" src="image/tower2.png" draggable="true" ondragstart="handleDragStart2(event)" width="50" height="50">
+
+        <div class='tower' style='background-color: brown;' onclick='changeTower(1);' ">
+
+            Tower 2
+
+            <br>
+
+            Range: long
+
+            <br>
+
+            Damage: med
+
+            <br>
+
+            Rate: high
+
+            <br>
+
+            Cost: 75
+
         </div>
-        <p>3 different towers, 3 different attacker types. Attackers get stronger as game progresses. 
+
+    <p>
+<div id="box1"><img src="image/box.png" width="50" height="80"/></div>
+        <img id="img3" src="image/tower3.png" draggable="true" ondragstart="handleDragStart3(event)" width="50" height="50">
+
+        <div class='tower' style='background-color:aqua;' onclick='changeTower(2);' draggable="true" ondragstart="handleDragStart(event)">
+
+            Tower 3
+
+            <br>
+
+            Range: short
+
+            <br>
+
+            Damage: high
+
+            <br>
+
+            Rate: med
+
+            <br>
+
+            Cost: 75
+
+        </div>
+
+        <br>
+
+        <div style='width:600px;'>
+
+            Attackers Score: <span id='attackersScore'>0</span>
+
+            <span class='right'>Money: <span id='money'>250</span></span>
+
+            <br>Attackers Stopped: <span id='stopped'>0</span>
+
+        </div>
+
+<p>
+
+        3 different towers, 3 different attacker types. Attackers get stronger as game progresses.
+
         <script type='text/javascript' src='mainLoop.js'></script>
+
         <script type='text/javascript' src='attackerUnits.js'></script>
+
         <script type='text/javascript' src='towerUnits.js'></script>
+
         <script type='text/javascript' src='bullets.js'></script>
+
         <script type='text/javascript' src='mouseClick.js'></script>
-    </body>
+<div>
+	<button type="button" onclick="speed_down();">¢¸</button>
+	<button type="button" onclick="alldead();">¡á</button>
+	<button type="button" onclick="speed_up();">¢º</button>
+	</div>
+</body>
+
 </html>
