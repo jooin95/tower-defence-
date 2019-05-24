@@ -64,7 +64,17 @@ canvas.addEventListener('drop', function() {
     document.getElementById('money').innerHTML = money; //update money when adding tower
   }// end if
 }, false);
-
+//마우스 클릭했을 때
+// 오류 뜸
+/*
+canvas.addEventListener('click',function(){
+  for (var i = 0, j = towers.length; i < j; i++) {
+  if(towers[i].x-25 < mouse.x && towers[i].x+25>mouse.x && towers[i].y-25 < mouse.y && towers[i].y+25>mouse.y)
+    {
+      towers[i].type = 2;
+    }
+  }
+}*/
  //마우스가 이동할때 마우스의 위치를 가져옴
 window.addEventListener('dragover', getMousePos, false); 
 
@@ -93,13 +103,14 @@ function drawMouse() {
 //starts at top of page
 function towerAllowed(x,y) {
   if (money < towerClasses[currentTower].prototype.cost) return false; //can afford tower?
-  if( y < rectWidth*3) return false;
-  else if (y < firstBorder+rectWidth*2 && x > rightBorder- rectWidth  ) return false;
-  else if (y > firstBorder - rectWidth && y < firstBorder + rectWidth *2 && x > leftBorder - rectWidth) return false;
+  if( y < rectWidth*2) return true;
+  else if( y < rectWidth*3) return false;
+  else if (y < firstBorder+rectWidth && x > rightBorder- rectWidth && x < rightBorder+rectWidth*2 ) return false;
+  else if (y > firstBorder - rectWidth && y < firstBorder + rectWidth *2 && x > leftBorder - rectWidth && x < rightBorder + rectWidth) return false;
   else if (y > firstBorder + rectWidth*3 && y < secondBorder + rectWidth && x > leftBorder - rectWidth && x < leftBorder + rectWidth*2) return false;
   else if (y > secondBorder - rectWidth && y < secondBorder + rectWidth * 2 && x > leftBorder + rectWidth *2) return false;
-  else if (y > secondBorder && y < thirdBorder + rectWidth*2 && x > rightBorder - rectWidth) return false;
-  else if (y > thirdBorder - rectWidth && y < thirdBorder + rectWidth*2) return false;
+  else if (y > secondBorder && y < thirdBorder + rectWidth && x > rightBorder - rectWidth) return false;
+  else if (y > thirdBorder - rectWidth && y < thirdBorder + rectWidth) return false;
   else {
     for (var i = 0, j = towers.length; i < j; i++) {
       //check to see if existing tower is too close

@@ -86,7 +86,7 @@ Tower2.prototype.type=2;
 Tower2.prototype.range = Tower.prototype.range*1.4;//looking to double area, not radius or range
 Tower2.prototype.color = 'brown';
 Tower2.prototype.cost = Tower.prototype.cost * 1.5;
-Tower2.prototype.rateOfFire = Tower.prototype.rateOfFire / 2;
+Tower2.prototype.rateOfFire = Tower.prototype.rateOfFire / 12;
 
 //short range high damage tower
 var Tower3 = function(x,y,z) {

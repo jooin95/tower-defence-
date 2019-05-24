@@ -7,12 +7,12 @@ baseSpeed = 4*rectWidth/FPS,
 mouse, //mouse x and y for drawing range
 currentTower = 0, //tower type selector.
 //borders for attacker's path
-leftBorder = maxWidth/17-3,
-rightBorder = maxWidth*9/11-4,
+leftBorder = maxWidth/17-3,		//왼쪽 보더 2번 줄 왼쪽을 나타냄
+rightBorder = maxWidth*9/11-4,	//오른쪽 보더 
 //vertical borders:
-firstBorder = maxWidth*35/120,
-secondBorder = maxWidth*61/120-1,
-thirdBorder = maxWidth*11/15-6,
+firstBorder = maxWidth*35/120,	// 첫번쨰 줄 위치
+secondBorder = maxWidth*61/120-1,	// 두번째 줄 위치
+thirdBorder = maxWidth*11/15-6,	// 3번째 줄 위치
 //points/statistics
 attackerPoints = 0,
 stopped = 0,
