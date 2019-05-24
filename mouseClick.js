@@ -35,7 +35,6 @@ function handleDrop(e) {
 e.preventDefault();
 mouseDown =false;
 var src = e.dataTransfer.getData("Text");
-e.target.appendChild(document.getElementById(src));
 }
 
 //마우스 위치
@@ -66,15 +65,13 @@ canvas.addEventListener('drop', function() {
 }, false);
 //마우스 클릭했을 때
 // 오류 뜸
-/*
 canvas.addEventListener('click',function(){
-  for (var i = 0, j = towers.length; i < j; i++) {
-  if(towers[i].x-25 < mouse.x && towers[i].x+25>mouse.x && towers[i].y-25 < mouse.y && towers[i].y+25>mouse.y)
-    {
-      towers[i].type = 2;
-    }
-  }
-}*/
+ for (var i = 0, j = towers.length; i < j; i++) {
+  if(Math.abs(mouse.x-towers[i].x) < 2*rectWidth && Math.abs(towers[i].y-mouse.y) < 2*rectWidth) {
+    towers[i].click=true;
+  }   
+ }
+}, false);
  //마우스가 이동할때 마우스의 위치를 가져옴
 window.addEventListener('dragover', getMousePos, false); 
 

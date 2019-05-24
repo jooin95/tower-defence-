@@ -4,6 +4,8 @@ var towers=[];
 
 var tower1= new Image();
 tower1.src = ("image/tower1.png");
+var tower1click= new Image();
+tower1click.src = ("image/tower1click.png");
 var tower2= new Image();
 tower2.src = ("image/tower2.png");
 var tower3= new Image();
@@ -13,7 +15,8 @@ tower3.src = ("image/tower3.png");
 function Tower(x,y,z) {
   this.x = x,
   this.y = y,
-  this.type=1
+  this.type=1,
+  this.click=false;
 }
 
 Tower.prototype.r = rectWidth; //radius
@@ -39,9 +42,9 @@ Tower.prototype.findTarget = function() {
   for (var i = 0, j = enemies.length; i < j; i ++) {
     var dist = (enemies[i].x-this.x)*(enemies[i].x-this.x+rectWidth)+(enemies[i].y-this.y)*(enemies[i].y-this.y+rectWidth); //rectWidth included to look at center of rectangle, not top left corner
     if (dist < (this.range*this.range)) { //sqaure of range. avoice Math.sqrt which is expensive
-      this.target = enemies[i];
-      return; //only need a single target
-    }
+     this.target = enemies[i];
+    return; //only need a single target
+   }
   }
 };
 
@@ -55,8 +58,10 @@ Tower.prototype.findUnitVector = function() {
 };
 Tower.prototype.draw= function() {
   //draw outter circle
-  if(this.type==1)
+  if(this.type==1 && this.click == false)
      context.drawImage(tower1,this.x-25,this.y-25,50,50);
+  else if(this.click == true && this.type==1)
+     context.drawImage(tower1click, this.x-25, this.y-25, 50, 50);
   else if(this.type==3)
      context.drawImage(tower3,this.x-25,this.y-25,50,50);
   else if(this.type==2)
