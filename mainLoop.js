@@ -1,18 +1,28 @@
 var canvas = document.getElementById('canvas'),
 context = canvas.getContext('2d'),
 rectWidth = 20, //basic game unit size (pixles)
+gamespeed = 1000,
 maxWidth = canvas.width, //add maxHight if not perfect square
 FPS = 30,
 baseSpeed = 4*rectWidth/FPS,
 mouse, //mouse x and y for drawing range
 currentTower = 0, //tower type selector.
 //borders for attacker's path
+<<<<<<< HEAD
 leftBorder = maxWidth/17-3,		//¿ÞÂÊ º¸´õ 2¹ø ÁÙ ¿ÞÂÊÀ» ³ªÅ¸³¿
 rightBorder = maxWidth*9/11-4,	//¿À¸¥ÂÊ º¸´õ 
 //vertical borders:
 firstBorder = maxWidth*35/120,	// Ã¹¹ø¤Š ÁÙ À§Ä¡
 secondBorder = maxWidth*61/120-1,	// µÎ¹øÂ° ÁÙ À§Ä¡
 thirdBorder = maxWidth*11/15-6,	// 3¹øÂ° ÁÙ À§Ä¡
+=======
+leftBorder = maxWidth/17-3,		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 2ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½
+rightBorder = maxWidth*9/11-4,	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
+//vertical borders:
+firstBorder = maxWidth*35/120,	// Ã¹ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Ä¡
+secondBorder = maxWidth*61/120-1,	// ï¿½Î¹ï¿½Â° ï¿½ï¿½ ï¿½ï¿½Ä¡
+thirdBorder = maxWidth*11/15-6,	// 3ï¿½ï¿½Â° ï¿½ï¿½ ï¿½ï¿½Ä¡
+>>>>>>> c081c23fdb173edeabf584394eb039b6464371e8
 //points/statistics
 attackerPoints = 0,
 stopped = 0,
@@ -73,10 +83,10 @@ mainLoopLogic = function() {
      i--;
     }
   }
-  setTimeout(mainLoopLogic, 1000/FPS);
+  setTimeout(mainLoopLogic, gamespeed/FPS);
 };
  
 window.onload = function() {
-  setTimeout(mainLoopLogic, 1000/FPS);
+  setTimeout(mainLoopLogic, gamespeed/FPS);
   requestAnimationFrame(mainLoopRender);
 };
