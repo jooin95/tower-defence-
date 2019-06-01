@@ -1,15 +1,14 @@
-//ÀÌÂÊ ºÎÅÍ ¸¶¿ì½º ÀÌº¥Æ®
+//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ì½º ï¿½Ìºï¿½Æ®
 mouseDown = false;
+skilluse = false;
+towerBuild = false;
 function allowDrop(e) {
 e.preventDefault();
-}
-function handleDragStart(e) {
-e.dataTransfer.effectAllowed = 'move';
-e.dataTransfer.setData("Text", e.target.id);
 }
 function handleDragStart1(e) {
 e.dataTransfer.effectAllowed = 'move';
 mouseDown = true;
+towerBuild = true;
 changeTower(0);
 code = '<img id="img1" src="image/tower1.png" width="50" height="50">'
 e.dataTransfer.setData("Text", code);
@@ -18,6 +17,7 @@ e.dataTransfer.setData("Text", code);
 function handleDragStart2(e) {
 e.dataTransfer.effectAllowed = 'move';
 mouseDown = true;
+towerBuild = true;
 changeTower(1);
 code = '<img id="img1" src="image/tower1.png" width="50" height="50">'
 e.dataTransfer.setData("Text", code);
@@ -26,10 +26,29 @@ e.dataTransfer.setData("Text", code);
 function handleDragStart3(e) {
 e.dataTransfer.effectAllowed = 'move';
 mouseDown = true;
+towerBuild = true;
 changeTower(2);
 code = '<img id="img1" src="image/tower1.png" width="50" height="50">'
 e.dataTransfer.setData("Text", code);
 }
+function handleDragStart4(e) {
+	e.dataTransfer.effectAllowed = 'move';
+	mouseDown = true;
+	skilluse = true;
+	changeSkill(0);
+	}
+function handleDragStart5(e) {
+	e.dataTransfer.effectAllowed = 'move';
+	mouseDown = true;
+	skilluse = true;
+	changeSkill(1);
+	}
+function handleDragStart6(e) {
+	e.dataTransfer.effectAllowed = 'move';
+	mouseDown = true;
+	skilluse = true;
+	changeSkill(2);
+	}
 
 function handleDrop(e) {
 e.preventDefault();
@@ -37,7 +56,7 @@ mouseDown =false;
 var src = e.dataTransfer.getData("Text");
 }
 
-//¸¶¿ì½º À§Ä¡
+//ï¿½ï¿½ï¿½ì½º ï¿½ï¿½Ä¡
 
 function getMousePos(evt) {
   var rect = canvas.getBoundingClientRect();
@@ -53,18 +72,30 @@ function changeTower(n) {
   currentTower = n;
 }
 var type = towerClasses[currentTower].prototype.type;
-
+function changeSkill(n) {
+	  currentSkill = n;
+}
+var Skilltype = skillClasses[currentSkill].prototype.type;
 //////////////////////////////////////////////////////////////////////////////////////
 //add tower
 canvas.addEventListener('drop', function() {
-  if(towerAllowed(mouse.x,mouse.y)) {
+  if(towerAllowed(mouse.x,mouse.y) && towerBuild == true) {
     towers.push(new towerClasses[currentTower](mouse.x,mouse.y,type));
     money -= towerClasses[currentTower].prototype.cost;
     document.getElementById('money').innerHTML = money; //update money when adding tower
+    towerBuild = false;
   }// end if
+  else if(skilluse == true)
+	{
+	  if(currentSkill == '0' && sk0_delay == 0)
+	   skills.push(new skillClasses[currentSkill](mouse.x, mouse.y,0));
+	  if(currentSkill == '1' && sk1_delay == 0)
+		   skills.push(new skillClasses[currentSkill](mouse.x, mouse.y,1));
+	  if(currentSkill == '2' && sk2_delay == 0)
+		   skills.push(new skillClasses[currentSkill](mouse.x, mouse.y,2));
+	  skilluse = false;
+	}
 }, false);
-//¸¶¿ì½º Å¬¸¯ÇßÀ» ¶§
-// ¿À·ù ¶ä
 canvas.addEventListener('click',function(){
  for (var i = 0, j = towers.length; i < j; i++) {
   if(Math.abs(mouse.x-towers[i].x) < 2*rectWidth && Math.abs(towers[i].y-mouse.y) < 2*rectWidth) {
@@ -72,32 +103,70 @@ canvas.addEventListener('click',function(){
   }   
  }
 }, false);
- //¸¶¿ì½º°¡ ÀÌµ¿ÇÒ¶§ ¸¶¿ì½ºÀÇ À§Ä¡¸¦ °¡Á®¿È
+
 window.addEventListener('dragover', getMousePos, false); 
 
-//¸¶¿ì½º ±×·ÁÁÜ
 function drawMouse() {
-  //¸¶¿ì½º°¡ ¾øÀ¸¸é ¾Æ¸ð°Íµµ ÇÏÁö ¾ÊÀ½
   if(!mouse) return;
-  //Å¸¿ö Á¾·ùÀÇ ¹üÀ§¸¦ °¡Á®¿È
   var range = towerClasses[currentTower].prototype.range;
+  var skillrange = skillClasses[currentSkill].prototype.range;
   context.beginPath();
-
-  //Åõ¸íµµ
-  context.globalAlpha = 0.2;
-  //Å¸¿öÀÇ ¹üÀ§¸¦ Ç¥½ÃÇØÁÜ
-  context.arc(mouse.x,mouse.y,range, 0, 2*Math.PI);
-  //¸¸¾à¿¡ Å¸¿ö¸¦ ÁöÀ»¼ö ÀÖÀ¸¸é ³ë¶õ»ö
-  if(towerAllowed(mouse.x,mouse.y)) context.fillStyle='yellow';
-  //¾Æ´Ï¸é »¡°£»ö
-  else context.fillStyle = 'red';
-  context.fill();
-  var type = towerClasses[currentTower].prototype.type;
-  context.globalAlpha = 1;
+  if(towerBuild==true){
+  //ï¿½ï¿½ï¿½ï¿½
+	  context.globalAlpha = 0.2;
+	  //Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	  context.arc(mouse.x,mouse.y,range, 0, 2*Math.PI);
+	  //ï¿½ï¿½ï¿½à¿¡ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
+	  if(towerAllowed(mouse.x,mouse.y)) context.fillStyle='yellow';
+	  //ï¿½Æ´Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	  else context.fillStyle = 'red';
+	  context.fill();
+	  var type = towerClasses[currentTower].prototype.type;
+	  context.globalAlpha = 1;
+  }else if(skilluse == true)
+  {
+	  if(currentSkill == '0'){
+		context.globalAlpha = 0.2;
+		context.arc(mouse.x,mouse.y,skillrange,0,2*Math.PI);
+		if(sk0_delay > 0){
+		  context.fillStyle='red';
+	  	}
+	  	else{
+		  context.fillStyle='yellow';
+	  	}
+		context.fill();
+		var Skilltype = skillClasses[currentSkill].prototype.type;
+		context.globalAlpha = 1;
+	  }
+	  else if(currentSkill == '1'){
+		  context.globalAlpha = 0.2;
+		  context.arc(mouse.x,mouse.y,skillrange,0,2*Math.PI);
+		  if(sk1_delay > 0){
+			context.fillStyle='red';
+		  }
+		  else{
+			context.fillStyle='yellow';
+		  }
+		  context.fill();
+		  var Skilltype = skillClasses[currentSkill].prototype.type;
+		  context.globalAlpha = 1;
+		}
+	  else if(currentSkill == '2'){
+		  context.globalAlpha = 0.2;
+		  context.arc(mouse.x,mouse.y,skillrange,0,2*Math.PI);
+		  if(sk2_delay > 0){
+			context.fillStyle='red';
+		  }
+		  else{
+			context.fillStyle='yellow';
+		  }
+		  context.fill();
+		  var Skilltype = skillClasses[currentSkill].prototype.type;
+		  context.globalAlpha = 1;
+		}
+  }
 }
 
-//Å¸¿ö¸¦ ¸¸µé¼ö ÀÖ´ÂÁö ¾Ë·ÁÁÜ
-//starts at top of page
 function towerAllowed(x,y) {
   if (money < towerClasses[currentTower].prototype.cost) return false; //can afford tower?
   if( y < rectWidth*2) return true;

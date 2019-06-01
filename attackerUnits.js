@@ -15,10 +15,9 @@ function Enemy(x,y) {
 }
 
 //common to all Emeny objects
-Enemy.prototype.maxLife = 40;
-Enemy.prototype.speed = baseSpeed;
+Enemy.prototype.maxLife = 500;
+Enemy.prototype.speed = baseSpeed/2;
 Enemy.prototype.color = 'red';
-
 Enemy.prototype.draw = function() {
   if(animation<4){
 	  context.drawImage(enemy1[animation],this.x,this.y,rectWidth,rectWidth);  
