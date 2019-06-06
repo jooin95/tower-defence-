@@ -35,18 +35,16 @@ function Tower(x,y,z) {
   this.x = x,
   this.y = y,
   this.type=1,
+  this.hurt = 5;
   this.upgrade = z;
 };
-Tower.prototype.upgrade=0;
 Tower.prototype.r = rectWidth; //radius
 //Tower.prototype.constructor = Tower1;
 Tower.prototype.type=1;
 Tower.prototype.rateOfFire = FPS; //DPS
 Tower.prototype.range = rectWidth*5;
-Tower.prototype.hurt = Enemy.prototype.maxLife/6; // m 
 Tower.prototype.color = 'green';
 Tower.prototype.cost = 50;
-//Tower.prototype.upgrade=0;
 Tower.prototype.findTarget = function() {
   //if no enemies, no target
   if(enemies.length === 0) {
@@ -59,11 +57,17 @@ Tower.prototype.findTarget = function() {
   }
   //find first enemy withing range and select that as tower's target
   for (var i = 0, j = enemies.length; i < j; i ++) {
-    var dist = (enemies[i].x-this.x)*(enemies[i].x-this.x+rectWidth)+(enemies[i].y-this.y)*(enemies[i].y-this.y+rectWidth); //rectWidth included to look at center of rectangle, not top left corner
+	var dist = (enemies[i].x-this.x)*(enemies[i].x-this.x+rectWidth)+(enemies[i].y-this.y)*(enemies[i].y-this.y+rectWidth); //rectWidth included to look at center of rectangle, not top left corner
     if (dist < (this.range*this.range)) { //sqaure of range. avoice Math.sqrt which is expensive
-     this.target = enemies[i];
-    return; //only need a single target
-   }
+    	this.target = enemies[i];
+    	return; //only need a single target
+    }
+  }
+  if(this.target){
+    if(((this.target.x-this.x)*(this.target.x-this.x+rectWidth)+(this.target.y-this.y)*(this.target.y-this.y+rectWidth))>(this.range*this.range)){
+	   this.target = null;
+	   return;
+    }
   }
 };
 
@@ -71,14 +75,13 @@ var Tower2 = function(x,y,z) {
 	  this.x = x,
 	  this.y = y,
 	  this.upgrade = z,
+	  this.hurt = 6;
 	  this.type=2;
 };
 	Tower2.prototype = Object.create(Tower.prototype);
 	Tower2.prototype.constructor = Tower2;
 	Tower2.prototype.type=2;
 	Tower2.prototype.range = Tower.prototype.range*1.4;//looking to double area, not radius or range
-	Tower2.prototype.color = 'brown';
-	//Tower2.prototype.upgrade=0;
 	Tower2.prototype.cost = Tower.prototype.cost * 1.5;
 	Tower2.prototype.rateOfFire = Tower.prototype.rateOfFire / 12;
 
@@ -87,6 +90,7 @@ var Tower2 = function(x,y,z) {
 	  this.x = x,
 	  this.y = y,
 	  this.type=3,
+	  this.hurt = 10;
 	  this.upgrade = z;
 	};
 	Tower3.prototype = Object.create(Tower.prototype);
@@ -94,8 +98,6 @@ var Tower2 = function(x,y,z) {
 	Tower3.prototype.type=3;
 	Tower3.prototype.range = Tower.prototype.range * 0.7; //0.7 rather than 0.5 because looking at area
 	Tower3.prototype.hurt = Tower.prototype.hurt*2;
-	Tower3.prototype.color = 'aqua';
-	//Tower3.prototype.upgrade=0;
 	Tower3.prototype.cost = Tower.prototype.cost * 1.5;
 
 
@@ -141,7 +143,7 @@ Tower.prototype.draw= function() {
 Tower.prototype.fire = function() {
   this.rateOfFire--;
   if(this.target && this.rateOfFire <=0) {
-    bullets.push(new Bullet(this.xFire,this.yFire,this.target,this.hurt));
+    bullets.push(new Bullet(this.xFire,this.yFire,this.target,this.hurt,this.type));
     //reset this objects rateOfFire to the prototypes
     this.rateOfFire = this.constructor.prototype.rateOfFire;
   };

@@ -14,15 +14,12 @@ function sleep(num){	//[1/1000초]
 
 
 function stages(){
-	if(stage != save){
-	$("#step").html("Stage " + stage);
+	
+	$("#step").text("Stage " + stage);
 	$("#step").show();
-    
-	sleep(2000);
-    
-    $("#step").hide();
     save = stage;
-	}
+    delay = 50;
+	triger = true;
 };
 
 function gameovers(){

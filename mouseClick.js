@@ -68,48 +68,49 @@ function getMousePos(evt) {
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 function changeUpgrade1() {
-	for (var i = 0, j = towers.length; i < j; i++) {
-		if(towers[i].type == 1 && towers[i].upgrade == 0){
-			towers[i].upgrade = 1;
-			tower1_up = 1;
-		}else if(towers[i].type == 1 && towers[i].upgrade == 1){
-			towers[i].upgrade = 2;
-			tower1_up = 2;
-		}else if(towers[i].type == 1 && towers[i].upgrade == 2){
-			towers[i].upgrade = 3;
-			tower1_up = 3;
-		}
-	}
+    if (money >= 500) {
+        money -= 500;
+        document.getElementById('money').innerHTML = money; //update money when adding tower
+        for (var i = 0, j = towers.length; i < j; i++) {
+            if (towers[i].type == 1 && towers[i].upgrade == 0) {
+                towers[i].upgrade = 1, towers[i].hurt = towers[i].hurt + 3;
+            } else if (towers[i].type == 1 && towers[i].upgrade == 1) {
+                towers[i].upgrade = 2, towers[i].hurt = towers[i].hurt + 3;
+            } else if (towers[i].type == 1 && towers[i].upgrade == 2) {
+                towers[i].upgrade = 3, towers[i].hurt = towers[i].hurt + 4;
+            }
+        }
+    }
 }
 function changeUpgrade2() {
-
-	for (var i = 0, j = towers.length; i < j; i++) {
-		if(towers[i].type == 2 && towers[i].upgrade == 0){
-			towers[i].upgrade = 1;
-			tower2_up = 1;
-		}else if(towers[i].type == 2 && towers[i].upgrade == 1){
-			towers[i].upgrade = 2;
-			tower2_up = 2;
-		}else if(towers[i].type == 2 && towers[i].upgrade == 2){
-			towers[i].upgrade = 3;
-			tower2_up = 3;
-		}
-	}
+    if (money >= 600) {
+        money -= 600;
+        document.getElementById('money').innerHTML = money; //update money when adding tower
+        for (var i = 0, j = towers.length; i < j; i++) {
+            if (towers[i].type == 2 && towers[i].upgrade == 0) {
+                towers[i].upgrade = 1, towers[i].hurt = towers[i].hurt + 30;
+            } else if (towers[i].type == 2 && towers[i].upgrade == 1) {
+                towers[i].upgrade = 2, towers[i].hurt = towers[i].hurt + 30;
+            } else if (towers[i].type == 2 && towers[i].upgrade == 2) {
+                towers[i].upgrade = 3, towers[i].hurt = towers[i].hurt + 40;
+            }
+        }
+    }
 }
 function changeUpgrade3() {
-	
-	for (var i = 0, j = towers.length; i < j; i++) {
-		if(towers[i].type == 3 && towers[i].upgrade == 0){
-			towers[i].upgrade = 1;
-			tower3_up = 1;
-		}else if(towers[i].type == 3 && towers[i].upgrade == 1){
-			towers[i].upgrade = 2;
-			tower3_up = 2;
-		}else if(towers[i].type == 3 && towers[i].upgrade == 2){
-			towers[i].upgrade = 3;
-			tower3_up = 3;
-		}
-	}
+    if (money >= 700) {
+        money -= 700;
+        document.getElementById('money').innerHTML = money; //update money when adding tower
+        for (var i = 0, j = towers.length; i < j; i++) {
+            if (towers[i].type == 3 && towers[i].upgrade == 0) {
+                towers[i].upgrade = 1, towers[i].hurt = towers[i].hurt + 5;
+            } else if (towers[i].type == 3 && towers[i].upgrade == 1) {
+                towers[i].upgrade = 2, towers[i].hurt = towers[i].hurt + 10;
+            } else if (towers[i].type == 3 && towers[i].upgrade == 2) {
+                towers[i].upgrade = 3, towers[i].hurt = towers[i].hurt + 15;
+            }
+        }
+    }
 }
 //change tower type
 function changeTower(n) {

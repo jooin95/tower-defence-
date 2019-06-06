@@ -20,7 +20,7 @@ attackerPoints = 0,
 stopped = 0,
 //counter for when to add enemy units
 addEnemyTimer = 60,
-money = 250,
+money = 700,
 moneyIncrement = 5,
 tower1_up = 0,
 tower2_up = 0,
@@ -29,9 +29,11 @@ sk0_delay = 300,
 sk1_delay = 300,
 sk2_delay = 300,
 sk3_delay = 300,
+triger = false,
+delay = 0,
 wave =5,		//add source code
 stage = 1,
-totalunit = 0,
+totalunit = 5,
 total = 5,
 life = 5,
 save = false;
@@ -107,6 +109,15 @@ mainLoopRender = function() {
 
 //game logic (seperate from draw stuff)
 mainLoopLogic = function() {
+  if(stage != save && delay == 0 && triger == false){
+	  stages();
+  }
+  if(triger == true && delay == 0)
+  {
+     $("#step").hide();
+     triger = false;
+  }
+  if(delay ==0){
   checkForDead();
   addEnemyTimer--;
   if(total > 0){
@@ -142,12 +153,16 @@ mainLoopLogic = function() {
      j--;
      i--;
     }
+   }
   }
   document.getElementById('skill_1').innerHTML = parseInt(sk0_delay/FPS);
   document.getElementById('skill_2').innerHTML = parseInt(sk1_delay/FPS);
   document.getElementById('skill_3').innerHTML = parseInt(sk2_delay/FPS);
   document.getElementById('skill_4').innerHTML = parseInt(sk3_delay/FPS);
   setTimeout(mainLoopLogic, 1000/FPS);
+
+  if(delay > 0)
+	  delay--;
 };
 	skill_delay = function(){
 		if(sk2_delay >0)
