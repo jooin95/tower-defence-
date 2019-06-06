@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +7,6 @@
         .right {
             float: right;
         }
-
         .canvas {
             float: left;
             margin-right: 10px;
@@ -18,72 +16,271 @@
         .tower {
             display: inline-block;
             padding: 5px;
-            float: right;
             border: 1px solid;
         }
+        .gameover{
+        	background: rgba(0, 0, 0, 0.60);
+   			color: black;
+   			display: none;
+   			position: absolute;
+   			width: 602px;
+   			height: 602px;
+   			z-index: 2;
+        }
+#btn{
+border: 0px;
+margin: 0px;
+background-color:white;
+}
+#battle{
+position:absolute;
+left: 10px;
+top:10px;
+}
+#tower1{
+display: inline-block;
+position:absolute;
+left: 640px;
+top:80px;
+z-index:0;
+}
+#upgrade1{
+display: inline-block;
+position:absolute;
+left: 700px;
+top:100px;
+z-index:0;
+}
+#tower2{
+display: inline-block;
+position:absolute;
+left: 640px;
+top:180px;
+z-index:0;
+}
+#upgrade2{
+display: inline-block;
+position:absolute;
+left: 700px;
+top:200px;
+z-index:0;
+}
+#tower3{
+display: inline-block;
+position:absolute;
+left: 640px;
+top:280px;
+z-index:0;
+}
+#upgrade3{
+display: inline-block;
+position:absolute;
+left: 700px;
+top:300px;
+z-index:0;
+}
+#tanos{
+display: inline-block;
+position:absolute;
+left: 640px;
+top:480px;
+z-index:0;
+}
+#img1{
+position:absolute;
+left: 640px;
+top:90px;
+z-index:1;
+}
+#img2{
+position:absolute;
+left: 640px;
+top:190px;
+z-index:1;
+}
+#img3{
+position:absolute;
+left: 640px;
+top:290px;
+z-index:1;
+}
+#sidebar
+{
+position:absolute;
+left: 610px;
+top:16px;
+width: 30px; height: 600px;
+z-index:-1;
+}
+#skill_bar1
+{
+position:absolute;
+left: 640px;
+top:380px;
+z-index:1;
+}
+#skill_bar2
+{
+position:absolute;
+left: 710px;
+top:380px;
+z-index:1;
+}
+#skill_bar3
+{
+position:absolute;
+left: 780px;
+top:380px;
+z-index:1;
+}
+#skill1
+{
+position:absolute;
+left: 648px;
+top:386px;
+z-index:2;
+}
+#skill1Deley
+{
+position:absolute;
+left: 670px;
+top:435px;
+z-index:2;
+}
+#skill2
+{
+position:absolute;
+left: 718px;
+top:386px;
+z-index:2;
+}
+#skill2Deley
+{
+position:absolute;
+left: 740px;
+top:435px;
+z-index:2;
+}
+#skill3
+{
+position:absolute;
+left: 788px;
+top:386px;
+z-index:2;
+}
+#skill3Deley
+{
+position:absolute;
+left: 810px;
+top:435px;
+z-index:2;
+}
+#step{
+  color:red;
+  font-size: 30pt;
+  font-style:oblique;
+  position:absolute;
+  left:220px;
+  top:200px;
+}
     </style>
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script>
-        
-/**/</script>
+function speed_up(){
+gamespeed=gamespeed/2;
+}
+function speed_down(){
+gamespeed=gamespeed*2;
+}
+function alldead(){
+  for (var i = 0, j = enemies.length; i < j; i++ ) {
+    enemies[i].life =0 ;}
+  for (var i = 0, j = enemies.length; i < j; i++ ) {
+      enemies.splice(i,1);
+      i--;
+      j--; 
+	}
+}
+</script>
+
 </head>
+
 <body>
+<div id = sidebar>
+<img src="image/sidebar3.png" style="border : solid 1px;'" width="300" height="600"/>
+</div>
+
     <canvas id='canvas' class='canvas' width='600' height='600' style='border:1px solid #000;' ondrop="handleDrop(event)" ondragover="allowDrop(event)">Looks like HTML% canvas is turned off. Sorry, this tower defense game needs canvas to work</canvas>
-    <img id="img1" src="image/tower1.png" draggable="true" ondragstart="handleDragStart1(event)" width="50" height="50">
-    <div class='tower' style='background-color: green;' onclick='changeTower(0);'>
-        Tower 1
-        <br>
-        Range: med
-        <br>
-        Damage: med
-        <br>
-        Rate: med
-        <br>
-        Cost: 50
-    </div>
+    <div class="gameover"><button type="button" onclick="location.reload()">REGAME</button></div>
+ <div id="tower1"><img src="image/box.png" width="50" height="80"/> </div> 
+    <img id="img1" src="image/tower1.png" draggable="true" ondragstart="handleDragStart1(event)" width="50" height="50" >
+<div id="upgrade1"> 
+<span style="color:white">Cost : 50$<br>Upgrade : 500$</span>
+<br>
+ <button type="button" style="background-color:red;" onclick="changeUpgrade1();">Upgrade</button></div> 
     <p>
+<div id="tower2"><img src="image/box.png" width="50" height="80"/></div>
         <img id="img2" src="image/tower2.png" draggable="true" ondragstart="handleDragStart2(event)" width="50" height="50">
-        <div class='tower' style='background-color: brown;' onclick='changeTower(1);' ">
-            Tower 2
-            <br>
-            Range: long
-            <br>
-            Damage: med
-            <br>
-            Rate: high
-            <br>
-            Cost: 75
-        </div>
+<div id="upgrade2"> 
+<span style="color:white">Cost : 60$<br>Upgrade : 600$</span>
+<br>
+ <button type="button" style="background-color:red;" onclick="changeUpgrade2();">Upgrade</button></div> 
     <p>
+<div id="tower3"><img src="image/box.png" width="50" height="80"/></div>
         <img id="img3" src="image/tower3.png" draggable="true" ondragstart="handleDragStart3(event)" width="50" height="50">
-        <div class='tower' style='background-color:aqua;' onclick='changeTower(2);' >
-            Tower 3
-            <br>
-            Range: short
-            <br>
-            Damage: high
-            <br>
-            Rate: med
-            <br>
-            Cost: 75
-        </div>
-        <img id="skill1" src="image/bomb.png" draggable="true" ondragstart="handleDragStart4(event)" width="50" height="50">
+<div id="upgrade3"> 
+<span style="color:white">Cost : 70$<br>Upgrade : 700$</span>
+<br>
+ <button type="button" style="background-color:red;" onclick="changeUpgrade3();">Upgrade</button></div> 
+		<br>
         <br>
-        <img id="skill2" src="image/1.png" draggable="true" ondragstart="handleDragStart5(event)" width="50" height="50">
-        <br>
-        <img id="skill3" src="image/3.png" draggable="true" ondragstart="handleDragStart6(event)" width="50" height="50">
-        <br>
+<div id="tanos">
+<button class="btn" id="btn" type="button" onclick="earthQU();"><img class="btn-img" src="image/tanos.PNG" width="50" height="50"></button>
+</div>
         <div style='width:600px;'>
-            Attackers Score: <span id='attackersScore'>0</span>
+            LIFE: <span id='life'>5</span>
             <span class='right'>Money: <span id='money'>250</span></span>
-            <br>Attackers Stopped: <span id='stopped'>0</span>
+            <br>WAVE: <span id='totalunit'>5</span>
+            <br>STAGE: <span id='stage'>1</span>
         </div>
-<p>
-        3 different towers, 3 different attacker types. Attackers get stronger as game progresses.
+		<div id="skill_bar1">
+		<img src="image/skill_bar.png"  width="60" height="80">
+		</div>
+		<div id="skill1">
+		 <img src="image/bomb.png" draggable="true" ondragstart="handleDragStart4(event)" width="45" height="45">
+        </div>
+      
+        <div id="skill_bar2">
+		<img src="image/skill_bar.png"  width="60" height="80">
+		</div>
+		<div id="skill2">
+        <img src="image/skill0.png" draggable="true" ondragstart="handleDragStart5(event)" width="45" height="45">
+ 		 </div>
+        
+         <div id="skill_bar3">
+		<img src="image/skill_bar.png"  width="60" height="80">
+		</div>
+		<div id="skill3">
+        <img src="image/3.png" draggable="true" ondragstart="handleDragStart6(event)" width="45" height="45">
+        </div>
+        <div id="skill1Deley"> <span id='skill_1' style="color:white">0</span></div>
+        <div id="skill2Deley"> <span id='skill_2' style="color:white">0</span></div>
+         <div id="skill3Deley"> <span id='skill_3' style="color:white">0</span></div>
+         <div id="skill4Deley"> <span id='skill_4' style="color:white">0</span></div>
+         <div id="step">STAGE 1</div>
+		<p>3 different towers, 3 different attacker types. Attackers get stronger as game progresses.</p>
         <script type='text/javascript' src='mainLoop.js'></script>
-        <script type='text/javascript' src='attackerUnits.js'></script>
+        <script type='text/javascript' src='function.js'></script>
+        <script type='text/javascript' src='attackerUnits1.js'></script>
         <script type='text/javascript' src='towerUnits.js'></script>
         <script type='text/javascript' src='bullets.js'></script>
-        <script type='text/javascript' src='skillAction.js'></script>
+		 <script type='text/javascript' src='skillAction.js'></script>
         <script type='text/javascript' src='mouseClick.js'></script>
+<div>
+	<button type="button" onclick="speed_down();">¢¸</button>
+	<button type="button" onclick="alldead();">¡á</button>
+	<button type="button" onclick="speed_up();">¢º</button>
+	</div>
 </body>
+
 </html>

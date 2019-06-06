@@ -1,33 +1,52 @@
 //defense towers
 // base tower 
+
 var towers=[];
 
 var tower1= new Image();
 tower1.src = ("image/tower1.png");
-var tower1click= new Image();
-tower1click.src = ("image/tower1click.png");
+var tower1upgrade1= new Image();
+tower1upgrade1.src = ("image/tower1upgrade1.png");
+var tower1upgrade2= new Image();
+tower1upgrade2.src = ("image/tower1upgrade2.png");
+var tower1upgrade3= new Image();
+tower1upgrade3.src = ("image/tower1upgrade3.png");
+
 var tower2= new Image();
 tower2.src = ("image/tower2.png");
+var tower2upgrade1= new Image();
+tower2upgrade1.src = ("image/tower2upgrade1.png");
+var tower2upgrade2= new Image();
+tower2upgrade2.src = ("image/tower2upgrade2.png");
+var tower2upgrade3= new Image();
+tower2upgrade3.src = ("image/tower2upgrade3.png");
+
 var tower3= new Image();
 tower3.src = ("image/tower3.png");
+var tower3upgrade1= new Image();
+tower3upgrade1.src = ("image/tower3upgrade1.png");
+var tower3upgrade2= new Image();
+tower3upgrade2.src = ("image/tower3upgrade2.png");
+var tower3upgrade3= new Image();
+tower3upgrade3.src = ("image/tower3upgrade3.png");
 
 //Tower 1
 function Tower(x,y,z) {
   this.x = x,
   this.y = y,
   this.type=1,
-  this.click=false;
-}
-
+  this.upgrade = z;
+};
+Tower.prototype.upgrade=0;
 Tower.prototype.r = rectWidth; //radius
 //Tower.prototype.constructor = Tower1;
 Tower.prototype.type=1;
 Tower.prototype.rateOfFire = FPS; //DPS
 Tower.prototype.range = rectWidth*5;
-Tower.prototype.hurt = Enemy.prototype.maxLife/6; // m
+Tower.prototype.hurt = Enemy.prototype.maxLife/6; // m 
 Tower.prototype.color = 'green';
 Tower.prototype.cost = 50;
-
+//Tower.prototype.upgrade=0;
 Tower.prototype.findTarget = function() {
   //if no enemies, no target
   if(enemies.length === 0) {
@@ -48,6 +67,38 @@ Tower.prototype.findTarget = function() {
   }
 };
 
+var Tower2 = function(x,y,z) {
+	  this.x = x,
+	  this.y = y,
+	  this.upgrade = z,
+	  this.type=2;
+};
+	Tower2.prototype = Object.create(Tower.prototype);
+	Tower2.prototype.constructor = Tower2;
+	Tower2.prototype.type=2;
+	Tower2.prototype.range = Tower.prototype.range*1.4;//looking to double area, not radius or range
+	Tower2.prototype.color = 'brown';
+	//Tower2.prototype.upgrade=0;
+	Tower2.prototype.cost = Tower.prototype.cost * 1.5;
+	Tower2.prototype.rateOfFire = Tower.prototype.rateOfFire / 12;
+
+	//short range high damage tower
+	var Tower3 = function(x,y,z) {
+	  this.x = x,
+	  this.y = y,
+	  this.type=3,
+	  this.upgrade = z;
+	};
+	Tower3.prototype = Object.create(Tower.prototype);
+	Tower3.prototype.constructor = Tower3;
+	Tower3.prototype.type=3;
+	Tower3.prototype.range = Tower.prototype.range * 0.7; //0.7 rather than 0.5 because looking at area
+	Tower3.prototype.hurt = Tower.prototype.hurt*2;
+	Tower3.prototype.color = 'aqua';
+	//Tower3.prototype.upgrade=0;
+	Tower3.prototype.cost = Tower.prototype.cost * 1.5;
+
+
 Tower.prototype.findUnitVector = function() {
   if (!this.target) return false; //if there is no target, dont bother calculating unit vector
   var xDist = this.target.x-this.x;
@@ -58,14 +109,33 @@ Tower.prototype.findUnitVector = function() {
 };
 Tower.prototype.draw= function() {
   //draw outter circle
-  if(this.type==1 && this.click == false)
+  if(this.type==1 && this.upgrade == 0)
      context.drawImage(tower1,this.x-25,this.y-25,50,50);
-  else if(this.click == true && this.type==1)
-     context.drawImage(tower1click, this.x-25, this.y-25, 50, 50);
-  else if(this.type==3)
+  else if(this.upgrade == 1 && this.type==1)
+     context.drawImage(tower1upgrade1, this.x-30, this.y-30, 60, 60);
+  else if(this.upgrade == 2 && this.type==1)
+	     context.drawImage(tower1upgrade2, this.x-30, this.y-30, 60, 60);
+  else if(this.upgrade == 3 && this.type==1)
+	     context.drawImage(tower1upgrade3, this.x-30, this.y-30, 60, 60);
+	  
+  else if(this.type==3 && this.upgrade == 0)
      context.drawImage(tower3,this.x-25,this.y-25,50,50);
-  else if(this.type==2)
+  else if(this.upgrade == 1 && this.type==3)
+	     context.drawImage(tower3upgrade1, this.x-30, this.y-30, 60, 60);
+  else if(this.upgrade == 2 && this.type==3)
+		 context.drawImage(tower3upgrade2, this.x-30, this.y-30, 60, 60);
+  else if(this.upgrade == 3 && this.type==3)
+	     context.drawImage(tower3upgrade3, this.x-30, this.y-30, 60, 60);
+  
+  else if(this.type==2 && this.upgrade == 0)
      context.drawImage(tower2,this.x-25,this.y-25,50,50);
+  else if(this.upgrade == 1 && this.type==2)
+	     context.drawImage(tower2upgrade1, this.x-30, this.y-30, 60, 60);
+  else if(this.upgrade == 2 && this.type==2)
+		 context.drawImage(tower2upgrade2, this.x-30, this.y-30, 60, 60);
+  else if(this.upgrade == 3 && this.type==2)
+	     context.drawImage(tower2upgrade3, this.x-30, this.y-30, 60, 60);
+  
 };
 
 Tower.prototype.fire = function() {
@@ -80,32 +150,6 @@ Tower.prototype.fire = function() {
 //other types of towers
 //long range tower:
 
-var Tower2 = function(x,y,z) {
-  this.x = x,
-  this.y = y,
-  this.type=2
-}
-Tower2.prototype = Object.create(Tower.prototype);
-Tower2.prototype.constructor = Tower2;
-Tower2.prototype.type=2;
-Tower2.prototype.range = Tower.prototype.range*1.4;//looking to double area, not radius or range
-Tower2.prototype.color = 'brown';
-Tower2.prototype.cost = Tower.prototype.cost * 1.5;
-Tower2.prototype.rateOfFire = Tower.prototype.rateOfFire / 12;
-
-//short range high damage tower
-var Tower3 = function(x,y,z) {
-  this.x = x,
-  this.y = y,
-  this.type=3
-}
-Tower3.prototype = Object.create(Tower.prototype);
-Tower3.prototype.constructor = Tower3;
-Tower3.prototype.type=3;
-Tower3.prototype.range = Tower.prototype.range * 0.7; //0.7 rather than 0.5 because looking at area
-Tower3.prototype.hurt = Tower.prototype.hurt*2;
-Tower3.prototype.color = 'aqua';
-Tower3.prototype.cost = Tower.prototype.cost * 1.5;
 
 
 //populate array of towers

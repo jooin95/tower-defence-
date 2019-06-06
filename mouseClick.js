@@ -55,7 +55,6 @@ e.preventDefault();
 mouseDown =false;
 var src = e.dataTransfer.getData("Text");
 }
-
 //���콺 ��ġ
 
 function getMousePos(evt) {
@@ -65,11 +64,62 @@ function getMousePos(evt) {
     y: evt.clientY - rect.top 
   };
 } 
+
 /////////////////////////////////////////////////////////////////////////////////////////////
 
+function changeUpgrade1() {
+	for (var i = 0, j = towers.length; i < j; i++) {
+		if(towers[i].type == 1 && towers[i].upgrade == 0){
+			towers[i].upgrade = 1;
+			tower1_up = 1;
+		}else if(towers[i].type == 1 && towers[i].upgrade == 1){
+			towers[i].upgrade = 2;
+			tower1_up = 2;
+		}else if(towers[i].type == 1 && towers[i].upgrade == 2){
+			towers[i].upgrade = 3;
+			tower1_up = 3;
+		}
+	}
+}
+function changeUpgrade2() {
+
+	for (var i = 0, j = towers.length; i < j; i++) {
+		if(towers[i].type == 2 && towers[i].upgrade == 0){
+			towers[i].upgrade = 1;
+			tower2_up = 1;
+		}else if(towers[i].type == 2 && towers[i].upgrade == 1){
+			towers[i].upgrade = 2;
+			tower2_up = 2;
+		}else if(towers[i].type == 2 && towers[i].upgrade == 2){
+			towers[i].upgrade = 3;
+			tower2_up = 3;
+		}
+	}
+}
+function changeUpgrade3() {
+	
+	for (var i = 0, j = towers.length; i < j; i++) {
+		if(towers[i].type == 3 && towers[i].upgrade == 0){
+			towers[i].upgrade = 1;
+			tower3_up = 1;
+		}else if(towers[i].type == 3 && towers[i].upgrade == 1){
+			towers[i].upgrade = 2;
+			tower3_up = 2;
+		}else if(towers[i].type == 3 && towers[i].upgrade == 2){
+			towers[i].upgrade = 3;
+			tower3_up = 3;
+		}
+	}
+}
 //change tower type
 function changeTower(n) {
   currentTower = n;
+}
+function earthQU(){
+	if(sk3_delay == 0 && skilluse == false){
+		skills.push(new skillClasses[3](3));
+		skilluse = true;
+	}
 }
 var type = towerClasses[currentTower].prototype.type;
 function changeSkill(n) {
@@ -80,7 +130,15 @@ var Skilltype = skillClasses[currentSkill].prototype.type;
 //add tower
 canvas.addEventListener('drop', function() {
   if(towerAllowed(mouse.x,mouse.y) && towerBuild == true) {
-    towers.push(new towerClasses[currentTower](mouse.x,mouse.y,type));
+	if(currentTower == 0){
+		towers.push(new towerClasses[currentTower](mouse.x,mouse.y,tower1_up));
+	}
+	else if(currentTower == 1){
+		towers.push(new towerClasses[currentTower](mouse.x,mouse.y,tower2_up));
+	}
+	else if(currentTower == 2){
+		towers.push(new towerClasses[currentTower](mouse.x,mouse.y,tower3_up));
+	}
     money -= towerClasses[currentTower].prototype.cost;
     document.getElementById('money').innerHTML = money; //update money when adding tower
     towerBuild = false;
@@ -88,7 +146,7 @@ canvas.addEventListener('drop', function() {
   else if(skilluse == true)
 	{
 	  if(currentSkill == '0' && sk0_delay == 0)
-	   skills.push(new skillClasses[currentSkill](mouse.x, mouse.y,0));
+		   skills.push(new skillClasses[currentSkill](mouse.x, mouse.y,0));
 	  if(currentSkill == '1' && sk1_delay == 0)
 		   skills.push(new skillClasses[currentSkill](mouse.x, mouse.y,1));
 	  if(currentSkill == '2' && sk2_delay == 0)
@@ -96,13 +154,14 @@ canvas.addEventListener('drop', function() {
 	  skilluse = false;
 	}
 }, false);
-canvas.addEventListener('click',function(){
+/*canvas.addEventListener('click',function(){
  for (var i = 0, j = towers.length; i < j; i++) {
   if(Math.abs(mouse.x-towers[i].x) < 2*rectWidth && Math.abs(towers[i].y-mouse.y) < 2*rectWidth) {
     towers[i].click=true;
   }   
  }
 }, false);
+*/ //마우스클릭 
 
 window.addEventListener('dragover', getMousePos, false); 
 
