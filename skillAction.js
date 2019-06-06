@@ -4,12 +4,23 @@ var skill_1 = new Array();
 var skill_2 = new Array();
 var count = 0;
 
+let boom = new Audio();
+let wind = new Audio();
+let war = new Audio();
+let shake = new Audio();
+
+shake.src = "sound/shake.mp3";
+war.src = "sound/war.mp3";
+wind.src = "sound/wind.wav";
+boom.src = "sound/boom.wav";
+
 function skill(x,y,z) {
 	  this.x = x-25,
 	  this.y = y-25,
 	  this.type = z;
 	  this.animationcount = 10;
 	  this.hurt = 3;
+	  boom.play();
 }
 
 var sk_animation = 0;
@@ -78,6 +89,7 @@ function skill1(x,y,type) {
 	  this.type = type;
 	  this.animationcount = 5;
 	  this.hurt = 10;
+	  wind.play();
 }
 
 skill1.prototype.type = 1;
@@ -140,6 +152,7 @@ function skill2(x,y,type) {
 	  this.y = y,
 	  this.type = type;
 	  this.animationcount = 100;
+	  war.play();
 }
 
 skill2.prototype.type = 2;
@@ -176,6 +189,7 @@ function skill3(type) {
 	  this.type = type;
 	  this.count = 10;
 	  this.animationcount = 50;
+	  shake.play();
 }
 skill3.prototype.type = 3;
 skill3.prototype.hurt = 1;

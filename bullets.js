@@ -27,15 +27,15 @@ Bullet.prototype.move = function() {
 Bullet.prototype.draw = function() {
   context.beginPath();
   if(this.type == 1){
-	  context.drawImage(bulletImage1,this.x,this.y,15, 15);
+     context.drawImage(bulletImage1,this.x,this.y,15, 15);
   }
   else if(this.type == 2)
   {
-	  context.drawImage(bulletImage2,this.x,this.y,15, 15);
+     context.drawImage(bulletImage2,this.x,this.y,15, 15);
   }
   else if(this.type == 3)
   {
-	  context.drawImage(bulletImage,this.x,this.y,10, 10);
+     context.drawImage(bulletImage,this.x,this.y,10, 10);
   }
 };
  

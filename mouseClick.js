@@ -74,9 +74,12 @@ function changeUpgrade1() {
         for (var i = 0, j = towers.length; i < j; i++) {
             if (towers[i].type == 1 && towers[i].upgrade == 0) {
                 towers[i].upgrade = 1, towers[i].hurt = towers[i].hurt + 3;
+                tower1_up = 1;
             } else if (towers[i].type == 1 && towers[i].upgrade == 1) {
                 towers[i].upgrade = 2, towers[i].hurt = towers[i].hurt + 3;
+                tower1_up = 2;
             } else if (towers[i].type == 1 && towers[i].upgrade == 2) {
+            	tower1_up = 3;
                 towers[i].upgrade = 3, towers[i].hurt = towers[i].hurt + 4;
             }
         }
@@ -89,10 +92,13 @@ function changeUpgrade2() {
         for (var i = 0, j = towers.length; i < j; i++) {
             if (towers[i].type == 2 && towers[i].upgrade == 0) {
                 towers[i].upgrade = 1, towers[i].hurt = towers[i].hurt + 30;
+                tower2_up = 1;
             } else if (towers[i].type == 2 && towers[i].upgrade == 1) {
                 towers[i].upgrade = 2, towers[i].hurt = towers[i].hurt + 30;
+                tower2_up = 2;
             } else if (towers[i].type == 2 && towers[i].upgrade == 2) {
                 towers[i].upgrade = 3, towers[i].hurt = towers[i].hurt + 40;
+                tower2_up = 3;
             }
         }
     }
@@ -104,10 +110,13 @@ function changeUpgrade3() {
         for (var i = 0, j = towers.length; i < j; i++) {
             if (towers[i].type == 3 && towers[i].upgrade == 0) {
                 towers[i].upgrade = 1, towers[i].hurt = towers[i].hurt + 5;
+                tower3_up = 1;
             } else if (towers[i].type == 3 && towers[i].upgrade == 1) {
                 towers[i].upgrade = 2, towers[i].hurt = towers[i].hurt + 10;
+                tower3_up = 2;
             } else if (towers[i].type == 3 && towers[i].upgrade == 2) {
                 towers[i].upgrade = 3, towers[i].hurt = towers[i].hurt + 15;
+                tower3_up = 3;
             }
         }
     }

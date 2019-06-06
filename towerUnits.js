@@ -30,6 +30,11 @@ tower3upgrade2.src = ("image/tower3upgrade2.png");
 var tower3upgrade3= new Image();
 tower3upgrade3.src = ("image/tower3upgrade3.png");
 
+let build = new Audio();
+let clear = new Audio();
+
+clear.src = "sound/clear.mp3";
+build.src = "sound/build.mp3";
 //Tower 1
 function Tower(x,y,z) {
   this.x = x,
@@ -37,6 +42,7 @@ function Tower(x,y,z) {
   this.type=1,
   this.hurt = 5;
   this.upgrade = z;
+  build.play();
 };
 Tower.prototype.r = rectWidth; //radius
 //Tower.prototype.constructor = Tower1;
@@ -77,13 +83,14 @@ var Tower2 = function(x,y,z) {
 	  this.upgrade = z,
 	  this.hurt = 6;
 	  this.type=2;
+	  build.play();
 };
 	Tower2.prototype = Object.create(Tower.prototype);
 	Tower2.prototype.constructor = Tower2;
 	Tower2.prototype.type=2;
 	Tower2.prototype.range = Tower.prototype.range*1.4;//looking to double area, not radius or range
 	Tower2.prototype.cost = Tower.prototype.cost * 1.5;
-	Tower2.prototype.rateOfFire = Tower.prototype.rateOfFire / 12;
+	Tower2.prototype.rateOfFire = Tower.prototype.rateOfFire / 3;
 
 	//short range high damage tower
 	var Tower3 = function(x,y,z) {
@@ -92,6 +99,7 @@ var Tower2 = function(x,y,z) {
 	  this.type=3,
 	  this.hurt = 10;
 	  this.upgrade = z;
+	  build.play();
 	};
 	Tower3.prototype = Object.create(Tower.prototype);
 	Tower3.prototype.constructor = Tower3;

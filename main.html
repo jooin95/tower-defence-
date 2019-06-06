@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>HTML5/Canvas/Javascript tower defense game</title>
+    <title>진호성주인</title>
     <meta name="description" content="A tower defense game made with JavaScript and Canvas.">
     <style>
         .right {
@@ -11,6 +11,7 @@
             float: left;
             margin-right: 10px;
             background: url(image/mainLoop.png);
+            z-index: 1;
         }
 
         .tower {
@@ -18,269 +19,453 @@
             padding: 5px;
             border: 1px solid;
         }
-        .gameover{
-        	background: rgba(0, 0, 0, 0.60);
-   			color: black;
-   			display: none;
-   			position: absolute;
-   			width: 602px;
-   			height: 602px;
-   			z-index: 2;
-        }
-#btn{
-border: 0px;
-margin: 0px;
-background-color:white;
-}
-#battle{
-position:absolute;
-left: 10px;
-top:10px;
-}
-#tower1{
-display: inline-block;
-position:absolute;
-left: 640px;
-top:80px;
-z-index:0;
-}
-#upgrade1{
-display: inline-block;
-position:absolute;
-left: 700px;
-top:100px;
-z-index:0;
-}
-#tower2{
-display: inline-block;
-position:absolute;
-left: 640px;
-top:180px;
-z-index:0;
-}
-#upgrade2{
-display: inline-block;
-position:absolute;
-left: 700px;
-top:200px;
-z-index:0;
-}
-#tower3{
-display: inline-block;
-position:absolute;
-left: 640px;
-top:280px;
-z-index:0;
-}
-#upgrade3{
-display: inline-block;
-position:absolute;
-left: 700px;
-top:300px;
-z-index:0;
-}
-#tanos{
-display: inline-block;
-position:absolute;
-left: 640px;
-top:480px;
-z-index:0;
-}
-#img1{
-position:absolute;
-left: 640px;
-top:90px;
-z-index:1;
-}
-#img2{
-position:absolute;
-left: 640px;
-top:190px;
-z-index:1;
-}
-#img3{
-position:absolute;
-left: 640px;
-top:290px;
-z-index:1;
-}
-#sidebar
-{
-position:absolute;
-left: 610px;
-top:16px;
-width: 30px; height: 600px;
-z-index:-1;
-}
-#skill_bar1
-{
-position:absolute;
-left: 640px;
-top:380px;
-z-index:1;
-}
-#skill_bar2
-{
-position:absolute;
-left: 710px;
-top:380px;
-z-index:1;
-}
-#skill_bar3
-{
-position:absolute;
-left: 780px;
-top:380px;
-z-index:1;
-}
-#skill1
-{
-position:absolute;
-left: 648px;
-top:386px;
-z-index:2;
-}
-#skill1Deley
-{
-position:absolute;
-left: 670px;
-top:435px;
-z-index:2;
-}
-#skill2
-{
-position:absolute;
-left: 718px;
-top:386px;
-z-index:2;
-}
-#skill2Deley
-{
-position:absolute;
-left: 740px;
-top:435px;
-z-index:2;
-}
-#skill3
-{
-position:absolute;
-left: 788px;
-top:386px;
-z-index:2;
-}
-#skill3Deley
-{
-position:absolute;
-left: 810px;
-top:435px;
-z-index:2;
-}
-#step{
-  color:red;
-  font-size: 30pt;
-  font-style:oblique;
-  position:absolute;
-  left:220px;
-  top:200px;
-}
-    </style>
-	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script>
-function speed_up(){
-gamespeed=gamespeed/2;
-}
-function speed_down(){
-gamespeed=gamespeed*2;
-}
-function alldead(){
-  for (var i = 0, j = enemies.length; i < j; i++ ) {
-    enemies[i].life =0 ;}
-  for (var i = 0, j = enemies.length; i < j; i++ ) {
-      enemies.splice(i,1);
-      i--;
-      j--; 
-	}
-}
-</script>
 
+        .gameover {
+            background: rgba(0, 0, 0, 0.60);
+            color: black;
+            display: none;
+            position: absolute;
+            width: 602px;
+            height: 602px;
+            z-index: 2;
+        }
+
+        .gameover {
+            background: rgba(0, 0, 0, 0.60);
+            color: black;
+            display: none;
+            position: absolute;
+            width: 602px;
+            height: 602px;
+            z-index: 2;
+        }
+
+        #gameover {
+            color: red;
+            font-size: 30pt;
+            font-style: oblique;
+            position: absolute;
+            left: 220px;
+            top: 200px;
+        }
+
+        #savedata {
+            color: red;
+            font-size: 30pt;
+            font-style: oblique;
+            position: absolute;
+            left: 220px;
+            top: 230px;
+        }
+
+        #tributton {
+            position: absolute;
+            left: 220px;
+            top: 300px;
+        }
+
+        #btn {
+            border: 0px;
+            margin: 0px;
+            background-color: white;
+        }
+
+        #battle {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+        }
+
+        #tower1 {
+            display: inline-block;
+            position: absolute;
+            left: 640px;
+            top: 80px;
+            z-index: 0;
+        }
+
+        #upgrade1 {
+            display: inline-block;
+            position: absolute;
+            left: 700px;
+            top: 100px;
+            z-index: 0;
+        }
+
+        #tower2 {
+            display: inline-block;
+            position: absolute;
+            left: 640px;
+            top: 180px;
+            z-index: 0;
+        }
+
+        #upgrade2 {
+            display: inline-block;
+            position: absolute;
+            left: 700px;
+            top: 200px;
+            z-index: 0;
+        }
+
+        #tower3 {
+            display: inline-block;
+            position: absolute;
+            left: 640px;
+            top: 280px;
+            z-index: 0;
+        }
+
+        #upgrade3 {
+            display: inline-block;
+            position: absolute;
+            left: 700px;
+            top: 300px;
+            z-index: 0;
+        }
+
+        #tanos {
+            display: inline-block;
+            position: absolute;
+            left: 640px;
+            top: 480px;
+            z-index: 0;
+        }
+
+        #img1 {
+            position: absolute;
+            left: 640px;
+            top: 90px;
+            z-index: 1;
+        }
+
+        #img2 {
+            position: absolute;
+            left: 640px;
+            top: 190px;
+            z-index: 1;
+        }
+
+        #img3 {
+            position: absolute;
+            left: 640px;
+            top: 290px;
+            z-index: 1;
+        }
+
+        #sidebar {
+            position: absolute;
+            left: 610px;
+            top: 16px;
+            width: 30px;
+            height: 600px;
+            z-index: -1;
+        }
+
+        #skill_bar1 {
+            position: absolute;
+            left: 640px;
+            top: 378px;
+            z-index: 1;
+        }
+
+        #skill_bar2 {
+            position: absolute;
+            left: 710px;
+            top: 378px;
+            z-index: 1;
+        }
+
+        #skill_bar3 {
+            position: absolute;
+            left: 780px;
+            top: 378px;
+            z-index: 1;
+        }
+
+        #skill_bar4 {
+            position: absolute;
+            left: 780px;
+            top: 462px;
+            z-index: 1;
+        }
+
+        #skill1 {
+            position: absolute;
+            left: 648px;
+            top: 384px;
+            z-index: 2;
+        }
+
+        #skill1Deley {
+            position: absolute;
+            left: 670px;
+            top: 431px;
+            z-index: 2;
+        }
+
+        #skill2 {
+            position: absolute;
+            left: 718px;
+            top: 384px;
+            z-index: 2;
+        }
+
+        #skill2Deley {
+            position: absolute;
+            left: 740px;
+            top: 431px;
+            z-index: 2;
+        }
+
+        #skill3 {
+            position: absolute;
+            left: 788px;
+            top: 384px;
+            z-index: 2;
+        }
+
+        #skill4 {
+            position: absolute;
+            left: 782px;
+            top: 468px;
+            z-index: 2;
+        }
+
+        #skill3Deley {
+            position: absolute;
+            left: 810px;
+            top: 431px;
+            z-index: 2;
+        }
+
+        #step {
+            color: red;
+            font-size: 30pt;
+            font-style: oblique;
+            position: absolute;
+            left: 220px;
+            top: 200px;
+        }
+
+        #skill4Deley {
+            position: absolute;
+            left: 810px;
+            top: 515px;
+            z-index: 2;
+        }
+
+        #option {
+            position: absolute;
+            left: 640px;
+            top: 462px;
+            z-index: 2;
+        }
+
+        #health {
+            position: absolute;
+            left: 640px;
+            top: 461px;
+            z-index: 3;
+        }
+
+        #health_bar {
+            position: absolute;
+            left: 710px;
+            top: 460px;
+            z-index: 3;
+        }
+
+        #money_bar {
+            position: absolute;
+            left: 710px;
+            top: 488px;
+            z-index: 3;
+        }
+
+        #stage_bar {
+            position: absolute;
+            left: 707px;
+            top: 518px;
+            z-index: 3;
+        }
+
+        #speedup {
+            position: absolute;
+            left: 850px;
+            top: 550px;
+            z-index: 3;
+        }
+
+        #speeddown {
+            position: absolute;
+            left: 630px;
+            top: 550px;
+            z-index: 3;
+        }
+
+        #wave {
+            position: absolute;
+            left: 720px;
+            top: 42px;
+            z-index: 3;
+        }
+
+        #wave_bar {
+            position: absolute;
+            left: 750px;
+            top: 40px;
+            z-index: 3;
+        }
+
+        #ranking {
+            position: absolute;
+            left: 920px;
+            top: 20px;
+        }
+        #rankbtu {
+            position: absolute;
+            left: 856px;
+            top: 44px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript">
+       function speed_up(){
+    	   if(gamespeed>250)
+	           gamespeed = gamespeed / 2;
+       }
+       function speed_down(){
+    	   if(gamespeed<4000)
+	           gamespeed = gamespeed * 2;
+       }
+       $(document).ready(function () {
+           // Display alert message after toggling paragraphs
+           $(".toggle-btn").click(function () {
+               $("iframe").toggle(1000, function () {
+                   // Code to be executed
+               });
+           });
+       });
+    </script>
 </head>
 
 <body>
-<div id = sidebar>
-<img src="image/sidebar3.png" style="border : solid 1px;'" width="300" height="600"/>
-</div>
+    <div id="rankbtu">
+    <button type="button" class="toggle-btn" style="background-color:rgba(0, 0, 0, 0)" id="btn" ><img class="btn-img" src="image/rankbtu.png" width="30" height="30"></button>
+    </div>    
+    <div id="ranking">
+        <iframe src="Ranking.jsp" width="310px" height="390px" scrolling="no"></iframe>
+    </div>
+    <div id="sidebar">
+        <img src="image/sidebar3.png" style="border : solid 1px;'" width="300" height="600" />
+    </div>
 
     <canvas id='canvas' class='canvas' width='600' height='600' style='border:1px solid #000;' ondrop="handleDrop(event)" ondragover="allowDrop(event)">Looks like HTML% canvas is turned off. Sorry, this tower defense game needs canvas to work</canvas>
-    <div class="gameover"><button type="button" onclick="location.reload()">REGAME</button></div>
- <div id="tower1"><img src="image/box.png" width="50" height="80"/> </div> 
-    <img id="img1" src="image/tower1.png" draggable="true" ondragstart="handleDragStart1(event)" width="50" height="50" >
-<div id="upgrade1"> 
-<span style="color:white">Cost : 50$<br>Upgrade : 500$</span>
-<br>
- <button type="button" style="background-color:red;" onclick="changeUpgrade1();">Upgrade</button></div> 
-    <p>
-<div id="tower2"><img src="image/box.png" width="50" height="80"/></div>
-        <img id="img2" src="image/tower2.png" draggable="true" ondragstart="handleDragStart2(event)" width="50" height="50">
-<div id="upgrade2"> 
-<span style="color:white">Cost : 60$<br>Upgrade : 600$</span>
-<br>
- <button type="button" style="background-color:red;" onclick="changeUpgrade2();">Upgrade</button></div> 
-    <p>
-<div id="tower3"><img src="image/box.png" width="50" height="80"/></div>
-        <img id="img3" src="image/tower3.png" draggable="true" ondragstart="handleDragStart3(event)" width="50" height="50">
-<div id="upgrade3"> 
-<span style="color:white">Cost : 70$<br>Upgrade : 700$</span>
-<br>
- <button type="button" style="background-color:red;" onclick="changeUpgrade3();">Upgrade</button></div> 
-		<br>
+    <div class="gameover">
+        <button class="tributton" onclick="location.reload()">REGAME</button>
+        <div id="gameover"></div>
+        <form id="savedata" action="savedata.jsp" method="POST">
+            <input type="hidden" name="score" id="score" readonly>
+            <input type="text" placeholder="영문 아이디 입력" name="name" id="name">
+            <input type="submit" name="submitButton" value="랭킹등록" id="submitButton">
+        </form>
+    </div>
+    <div id="tower1"><img src="image/box.png" width="50" height="80" /> </div>
+    <img id="img1" src="image/tower1.png" draggable="true" ondragstart="handleDragStart1(event)" width="50" height="50">
+    <div id="upgrade1">
+        <span style="color:white">Cost : 50$<br>Upgrade : 500$</span>
         <br>
-<div id="tanos">
-<button class="btn" id="btn" type="button" onclick="earthQU();"><img class="btn-img" src="image/tanos.PNG" width="50" height="50"></button>
-</div>
-        <div style='width:600px;'>
-            LIFE: <span id='life'>5</span>
-            <span class='right'>Money: <span id='money'>250</span></span>
-            <br>WAVE: <span id='totalunit'>5</span>
-            <br>STAGE: <span id='stage'>1</span>
+        <button type="button" style="background-color:red;" onclick="changeUpgrade1();">Upgrade</button>
+    </div>
+    <p>
+        <div id="tower2"><img src="image/box.png" width="50" height="80" /></div>
+        <img id="img2" src="image/tower2.png" draggable="true" ondragstart="handleDragStart2(event)" width="50" height="50">
+        <div id="upgrade2">
+            <span style="color:white">Cost : 75$<br>Upgrade : 600$</span>
+            <br>
+            <button type="button" style="background-color:red;" onclick="changeUpgrade2();">Upgrade</button>
         </div>
-		<div id="skill_bar1">
-		<img src="image/skill_bar.png"  width="60" height="80">
-		</div>
-		<div id="skill1">
-		 <img src="image/bomb.png" draggable="true" ondragstart="handleDragStart4(event)" width="45" height="45">
+    <p>
+        <div id="tower3"><img src="image/box.png" width="50" height="80" /></div>
+        <img id="img3" src="image/tower3.png" draggable="true" ondragstart="handleDragStart3(event)" width="50" height="50">
+        <div id="upgrade3">
+            <span style="color:white">Cost : 75$<br>Upgrade : 700$</span>
+            <br>
+            <button type="button" style="background-color:red;" onclick="changeUpgrade3();">Upgrade</button>
         </div>
-      
+        <div id="wave">
+            <img src="image/wave.png" width="20" height="20">
+        </div>
+        <div id="wave_bar">
+            <span id='totalunit' style="color:white">5</span>
+        </div>
+        <div id="health">
+            <img src="image/health.png" width="130" height="25">
+        </div>
+        <div id="health_bar">
+            <span id='life' style="color:white">5</span><span style="color:white">/5</span>
+        </div>
+        <div id="money_bar">
+            <span id='money' style="color:white">250</span>
+        </div>
+
+
+        <div id="stage_bar">
+            <span id='stage' style="color:white">1</span><span style="color:white">/50</span>
+        </div>
+
+        <div id="skill_bar1">
+            <img src="image/skill_bar.png" width="60" height="80">
+        </div>
+        <div id="skill1">
+            <img src="image/bomb.png" draggable="true" ondragstart="handleDragStart4(event)" width="45" height="45">
+        </div>
+
         <div id="skill_bar2">
-		<img src="image/skill_bar.png"  width="60" height="80">
-		</div>
-		<div id="skill2">
-        <img src="image/skill0.png" draggable="true" ondragstart="handleDragStart5(event)" width="45" height="45">
- 		 </div>
-        
-         <div id="skill_bar3">
-		<img src="image/skill_bar.png"  width="60" height="80">
-		</div>
-		<div id="skill3">
-        <img src="image/3.png" draggable="true" ondragstart="handleDragStart6(event)" width="45" height="45">
+            <img src="image/skill_bar.png" width="60" height="80">
+        </div>
+        <div id="skill2">
+            <img src="image/skill0.png" draggable="true" ondragstart="handleDragStart5(event)" width="45" height="45">
+        </div>
+
+        <div id="skill_bar3">
+            <img src="image/skill_bar.png" width="60" height="80">
+        </div>
+        <div id="skill3">
+            <img src="image/3.png" draggable="true" ondragstart="handleDragStart6(event)" width="45" height="45">
+        </div>
+        <div id="skill_bar4">
+            <img src="image/skill_bar.png" width="60" height="80">
+        </div>
+        <div id="skill4">
+            <button class="btn" style="background-color:rgba(0, 0, 0, 0)" id="btn" type="button" onclick="earthQU();"><img class="btn-img" src="image/swag.png" width="45" height="45"></button>
         </div>
         <div id="skill1Deley"> <span id='skill_1' style="color:white">0</span></div>
         <div id="skill2Deley"> <span id='skill_2' style="color:white">0</span></div>
-         <div id="skill3Deley"> <span id='skill_3' style="color:white">0</span></div>
-         <div id="skill4Deley"> <span id='skill_4' style="color:white">0</span></div>
-         <div id="step"><p>HI</p></div>
-		<p>3 different towers, 3 different attacker types. Attackers get stronger as game progresses.</p>
-        <script type='text/javascript' src='mainLoop.js'></script>
-        <script type='text/javascript' src='function.js'></script>
-        <script type='text/javascript' src='attackerUnits1.js'></script>
-        <script type='text/javascript' src='towerUnits.js'></script>
-        <script type='text/javascript' src='bullets.js'></script>
-		 <script type='text/javascript' src='skillAction.js'></script>
-        <script type='text/javascript' src='mouseClick.js'></script>
-<div>
-	<button type="button" onclick="speed_down();">◀</button>
-	<button type="button" onclick="alldead();">■</button>
-	<button type="button" onclick="speed_up();">▶</button>
-	</div>
+        <div id="skill3Deley"> <span id='skill_3' style="color:white">0</span></div>
+        <div id="skill4Deley"> <span id='skill_4' style="color:white">0</span></div>
+        <div id="step">STAGE 1</div>
+        <div id="option">
+            <img src="image/option.png" width="130" height="80">
+        </div>
+        <div id="speedup">
+            <button class="btn" style="background-color:rgba(0, 0, 0, 0)" id="btn" type="button" onclick="speed_up();"><img class="btn-img" src="image/speedup.png" width="30" height="30"></button>
+        </div>
+        <div id="speeddown">
+            <button class="btn" style="background-color:rgba(0, 0, 0, 0)" id="btn" type="button" onclick="speed_down();"><img class="btn-img" src="image/speeddown.png" width="30" height="30"></button>
+        </div>
+    <p></p>
+    <script type='text/javascript' src='mainLoop.js'></script>
+    <script type='text/javascript' src='function.js'></script>
+    <script type='text/javascript' src='attackerUnits1.js'></script>
+    <script type='text/javascript' src='towerUnits.js'></script>
+    <script type='text/javascript' src='bullets.js'></script>
+    <script type='text/javascript' src='skillAction.js'></script>
+    <script type='text/javascript' src='mouseClick.js'></script>
+
+
 </body>
 
 </html>
